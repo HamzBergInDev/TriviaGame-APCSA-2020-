@@ -6,7 +6,7 @@ import java.util.Random;
 
 class TriviaCombined {
   
-  public static void main (String[] args){
+  public static void main (String[] args) throws java.io.FileNotFoundException{
     
     // Variables that create windows.
     Draw windowQuiz = new Draw("The Quiz Show Window");
@@ -14,23 +14,21 @@ class TriviaCombined {
     Draw windowPoints = new Draw("Your Points");
     Draw windowInteractive = new Draw("Your Interactive Window!");
     
+    int correctAnswer = 0;
     
     // Their respective methods
     windowAnnouncerMethod(windowAnnouncer);
     windowQuizMethod(windowQuiz);
     windowPointsMethod(windowPoints);
-    windowInteractiveMethod(windowInteractive);
-    
-    
-    int correctAnswer = 0;
-    
+   
     //////////////////////////Copy + Paste Code//////////////////////////////////
-     File file = 
-      new File("trivia.txt"); 
+    File file = new File("trivia.txt"); 
     Scanner sc = new Scanner(file); 
+    
     ArrayList<String> questions = new ArrayList<String> ();
     ArrayList<String> answers = new ArrayList<String> ();
     ArrayList<String> wrongAnswers = new ArrayList<> ();
+    
     while (sc.hasNextLine()) {
       String line = sc.nextLine();
       if(line.equals("")){
@@ -39,17 +37,24 @@ class TriviaCombined {
       questions.add(line);
       answers.add(sc.nextLine());
     }
+    
     while(sc.hasNextLine()) {
       wrongAnswers.add(sc.nextLine());
     }
+    
     TriviaGame game = new TriviaGame();
+    
     System.out.println(game.getRandomQandA(questions, answers, wrongAnswers));
     //////////////////////////Copy + Paste Code//////////////////////////////////
     
+    windowInteractiveMethod(windowInteractive);
   }
   
   // Connects and Modifies Announcer Window
   public static void windowAnnouncerMethod(Draw wAnnouncer) {
+    
+    System.out.println("windowAnnouncerMethod Functioning");
+    
     // Strings that call for graphics
     String neutral = "Graphics/NeutralBackground.png";
     String correct = "Graphics/CorrectBackground.png";
@@ -59,15 +64,14 @@ class TriviaCombined {
     wAnnouncer.picture(0.5, 0.5, neutral);
     //wAnnouncer.picture(0.5, 0.5, correct);
     //wAnnouncer.picture(0.5, 0.5, incorrect);
-    System.out.println("windowAnnouncerMethod Functioning");
   }
   
   // Connects and Modifies Quiz Window
   public static void windowQuizMethod(Draw wQuiz){
+    System.out.println("windowQuizMethod Functioning");
     
     // Window Properties
     wQuiz.setCanvasSize(768,512);
-    System.out.println("windowQuizMethod Functioning");
     
     wQuiz.picture(0.5, 0.5, "Graphics/NeutralBackground.png", 1.0, 1.0);
     wQuiz.picture(0.5, 0.5, "Graphics/Template2.png", 0.85, 0.85);
@@ -78,6 +82,7 @@ class TriviaCombined {
     wQuiz.text(0.5, 0.5, titleQuestion);
   }
   
+  // Connects and Modifies Points Window
   public static void windowPointsMethod(Draw wPoints){
     System.out.println("windowPointsMethod Functioning");
     wPoints.setCanvasSize(384,256);
@@ -87,6 +92,8 @@ class TriviaCombined {
   
   // Connects and Modifies Interactive Window
   public static void windowInteractiveMethod(Draw wInteractive){
+    System.out.println("windowInteractiveMethod Functioning");
+    
     // Strings that hold text to be displayed on window. "p" stands for "possible."
     String pAnswerOne = "String1";
     String pAnswerTwo = "String2";
@@ -95,9 +102,9 @@ class TriviaCombined {
     
     String button = "Graphics/ButtonGraphic.png";
     
+    // Window Properties
     wInteractive.setCanvasSize(768,256);
-    System.out.println("windowInteractiveMethod Functioning");
-    
+
     wInteractive.picture(0.5, 0.5, "Graphics/NeutralBackground.png", 1.5, 4.0);
     
     wInteractive.setPenColor(wInteractive.WHITE);
@@ -171,5 +178,4 @@ class TriviaCombined {
     return questions.get(QandA) + "\n\n" + answers.get(QandA) + "\n" + wrongAnswers.get(randAns1) + "\n" + wrongAnswers.get(randAns2) + "\n" + wrongAnswers.get(randAns3);
   }
   //////////////////////////Copy + Paste Code//////////////////////////////////
-}
 }
