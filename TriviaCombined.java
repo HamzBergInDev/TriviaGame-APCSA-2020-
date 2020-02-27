@@ -15,14 +15,12 @@ class TriviaCombined {
     Draw windowPoints = new Draw("Your Points");
     Draw windowInteractive = new Draw("Your Interactive Window!");
       
+    int correctCount = 0;
       
     // Their respective methods
     windowAnnouncerMethod(windowAnnouncer);
      
     windowPointsMethod(windowPoints);
-      
-      
-    int correctAnswer = 0;
       
     //////////////////////////Copy + Paste Code//////////////////////////////////
     File file = 
@@ -42,12 +40,21 @@ class TriviaCombined {
     while(sc.hasNextLine()) {
       wrongAnswers.add(sc.nextLine());
     }
-    TriviaGame game = new TriviaGame();
-    String QandA[] = new String [] {game.getRandomQandA(questions, answers, wrongAnswers)};
-    windowQuizMethod(windowQuiz, QandA);
-    windowInteractiveMethod(windowInteractive);
+    
+    playGame(windowQuiz, windowInteractive, correctCount, questions, answers, wrongAnswers);
+  
     //////////////////////////Copy + Paste Code//////////////////////////////////
       
+  }
+  
+  public static void playGame (Draw windowQuiz, Draw windowInteractive, int correctCount, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
+    while(true) {
+    TriviaCombined game = new TriviaCombined();
+    String [] QandA = game.getRandomQandA(questions, answers, wrongAnswers);
+    System.out.println(QandA[0]);
+    windowQuizMethod(windowQuiz, QandA);
+    windowInteractiveMethod(windowInteractive, QandA, correctCount);
+    }
   }
     
   // Connects and Modifies Announcer Window
@@ -88,12 +95,13 @@ class TriviaCombined {
   }
     
   // Connects and Modifies Interactive Window
-  public static void windowInteractiveMethod(Draw wInteractive){
+  public static void windowInteractiveMethod(Draw wInteractive, String [] QandA, int correctCount, Draw windowQuiz, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     // Strings that hold text to be displayed on window. "p" stands for "possible."
-    String pAnswerOne = "String1";
-    String pAnswerTwo = "String2";
-    String pAnswerThree = "String3";
-    String pAnswerFour = "String4"; 
+    String trueAnswer = QandA[1];
+    String pAnswerOne = QandA[3];
+    String pAnswerTwo = QandA[1];
+    String pAnswerThree = QandA[2];
+    String pAnswerFour = QandA[4]; 
       
     String button = "Graphics/ButtonGraphic.png";
       
@@ -124,24 +132,33 @@ class TriviaCombined {
         
       // Artificial Hitbox for String 1 Textbox
       if (mouseInteract == true && ((y < 0.9375) && (y > 0.566)) && ((x < 0.375) && (x > 0.125))) {  
-        System.out.println(mouseInteract);
+        //System.out.println(mouseInteract);
+        correctCheck(pAnswerOne, trueAnswer, correctCount);
+        break;
       } 
         
       // Artificial Hitbox for String 2 Textbox
       if (mouseInteract == true && ((y < 0.4375) && (y > 0.066)) && ((x < 0.375) && (x > 0.125))) {
-        System.out.println(mouseInteract);
+        //System.out.println(mouseInteract);
+        correctCheck(pAnswerTwo, trueAnswer, correctCount);
+        break;
       } 
         
       // Artificial Hitbox for String 3 Textbox
       if (mouseInteract == true && ((y < 0.9375) && (y > 0.566)) && ((x < 0.835) && (x > 0.625))) {
-        System.out.println(mouseInteract);
+        //System.out.println(mouseInteract);
+        correctCheck(pAnswerThree, trueAnswer, correctCount);
+        break;
       } 
         
       // Artificial Hitbox for String 2 Textbox
       if (mouseInteract == true && ((y < 0.4375) && (y > 0.066)) && ((x < 0.835) && (x > 0.625))) {
-        System.out.println(mouseInteract);
+        //System.out.println(mouseInteract);
+        correctCheck(pAnswerFour, trueAnswer, correctCount);
+        break;
       }
     }
+    playGame(windowQuiz, wInteractive, correctCount, questions, answers, wrongAnswers);
   } 
     
   //////////////////////////Copy + Paste Code//////////////////////////////////
@@ -169,7 +186,7 @@ class TriviaCombined {
     if(randAns3 == randAns2) { 
       randAns3 = randAns2++;
     }
-    String QandA[] = new String [5];
+    String [] QandA = new String [5];
       
     String finalQuestion = questions.get(randQandA);
     String finalAnswer = answers.get(randQandA);
@@ -181,6 +198,17 @@ class TriviaCombined {
       
     return QandA;
   }
-  //////////////////////////Copy + Paste Code//////////////////////////////////
+  public static int correctCheck(String pAnswer, String tAnswer, int correctCount) {
+    
+    
+    if( pAnswer.equals(tAnswer) == true ) {
+      System.out.println("Correct!");
+      correctCount++;
+      System.out.println(correctCount);
+      
+    } else {
+      System.out.println("Wrong!");
+    }
+    return correctCount;
+  }
 }
-//}
