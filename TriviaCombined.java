@@ -53,7 +53,7 @@ class TriviaCombined {
     String [] QandA = game.getRandomQandA(questions, answers, wrongAnswers);
     System.out.println(QandA[0]);
     windowQuizMethod(windowQuiz, QandA);
-    windowInteractiveMethod(windowInteractive, QandA, correctCount);
+    windowInteractiveMethod(windowInteractive, QandA, correctCount, windowQuiz, questions, answers, wrongAnswers);
     }
   }
     
