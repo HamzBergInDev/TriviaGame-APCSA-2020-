@@ -7,7 +7,7 @@ import java.io.FileNotFoundException;
 
 /**
  * A trivia game about computer parts
- * Portrays questions
+ * Uses four windows to display question, answers, and points
  */ 
 
 class TriviaCombined {
