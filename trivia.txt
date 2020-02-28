@@ -7,15 +7,15 @@ Graphics Card
 I’ve got all my computer parts, where would I house all of them?
 Computer Case
 What storage medium uses a magnetic disk?
-Spinning Disk Hard Drive
+Spinning Disk HD
 I’ve got some data on a floppy disk, what computer part do I use to access this data?
 Floppy Drive
 What computer part delivers power to the whole computer?
 Power Supply
 I am often called “the heart of the computer,” who am I?
-Central Processing Unit
+CPU
 What computer part is equivalent to short term memory?
-Random Access Memory
+RAM
 Music and sound are the center of my purpose, who am I?
 Audio Chip/Card
 
