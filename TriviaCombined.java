@@ -5,6 +5,11 @@ import java.io.File;
 import java.util.Random;
 import java.io.FileNotFoundException;
 
+/**
+ * A trivia game about computer parts
+ * Portrays questions
+ */ 
+
 class TriviaCombined {
   
   public static int correctCount = 0;
@@ -41,7 +46,9 @@ class TriviaCombined {
     playGame(windowPoints, windowQuiz, windowInteractive, questions, answers, wrongAnswers);
     
   }
-  
+  /*
+   * 
+   */
   public static void playGame (Draw windowPoints, Draw windowQuiz, Draw windowInteractive, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     while(true) {
       TriviaCombined game = new TriviaCombined();
@@ -165,7 +172,16 @@ class TriviaCombined {
 
     playGame(windowPoints, windowQuiz, wInteractive, questions, answers, wrongAnswers);
     
-  } 
+  }
+  
+  /**
+   * Gets a random question, correct answer, and three random answers
+   * @return String array with question, correct answer, and three wrong answers
+   * @param questions This holds all questions in the game
+   * @param answers This holds all correct answers
+   * @param wrongAnswers This holds all incorrect answers
+   * @author Zoe Weiner
+   */
   
   public static String[] getRandomQandA (ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers) 
   {
@@ -203,6 +219,15 @@ class TriviaCombined {
     
     return QandA;
   }
+  
+  /**
+   * Checks that the answer chosen is correct
+   * Counts the number of correct answers chosen
+   * @param windowPoints 
+   * @param pAnswer This is the answer chosen
+   * @param tAnswer This is the correct answer
+   * @author 
+   */
   
   public static void correctCheck(Draw windowPoints, String pAnswer, String tAnswer) {
     
