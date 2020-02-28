@@ -4,27 +4,24 @@ import java.util.ArrayList;
 import java.io.File; 
 import java.util.Random;
 import java.io.FileNotFoundException;
-  
+
 class TriviaCombined {
-    
+  
+  public static int correctCount = 0;
+  
   public static void main (String[] args) throws FileNotFoundException {
-      
+    
     // Variables that create windows.
     Draw windowQuiz = new Draw("The Quiz Show Window");
     Draw windowAnnouncer = new Draw("The Announcer Window");
     Draw windowPoints = new Draw("Your Points");
     Draw windowInteractive = new Draw("Your Interactive Window!");
-      
-    int correctCount = 0;
-      
+    
     // Their respective methods
-    windowAnnouncerMethod(windowAnnouncer);
-     
-    windowPointsMethod(windowPoints);
-      
-    //////////////////////////Copy + Paste Code//////////////////////////////////
-    File file = 
-      new File("trivia.txt"); 
+    initWindowAnnouncer(windowAnnouncer);
+    initWindowPoints(windowPoints);
+    
+    File file = new File("trivia.txt"); 
     Scanner sc = new Scanner(file); 
     ArrayList<String> questions = new ArrayList<String> ();
     ArrayList<String> answers = new ArrayList<String> ();
@@ -41,127 +38,135 @@ class TriviaCombined {
       wrongAnswers.add(sc.nextLine());
     }
     
-    playGame(windowQuiz, windowInteractive, correctCount, questions, answers, wrongAnswers);
-  
-    //////////////////////////Copy + Paste Code//////////////////////////////////
-      
+    playGame(windowPoints, windowQuiz, windowInteractive, questions, answers, wrongAnswers);
+    
   }
   
-  public static void playGame (Draw windowQuiz, Draw windowInteractive, int correctCount, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
+  public static void playGame (Draw windowPoints, Draw windowQuiz, Draw windowInteractive, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     while(true) {
-    TriviaCombined game = new TriviaCombined();
-    String [] QandA = game.getRandomQandA(questions, answers, wrongAnswers);
-    System.out.println(QandA[0]);
-    windowQuizMethod(windowQuiz, QandA);
-    windowInteractiveMethod(windowInteractive, QandA, correctCount, windowQuiz, questions, answers, wrongAnswers);
+      TriviaCombined game = new TriviaCombined();
+      String [] QandA = game.getRandomQandA(questions, answers, wrongAnswers);
+      System.out.println(QandA[0]);
+      initWindowQuiz(windowQuiz, QandA);
+      initWindowInteractive(windowPoints, windowInteractive, QandA, windowQuiz, questions, answers, wrongAnswers);
     }
   }
-    
+  
   // Connects and Modifies Announcer Window
-  public static void windowAnnouncerMethod(Draw wAnnouncer) {
+  public static void initWindowAnnouncer(Draw wAnnouncer) {
+    
     // Strings that call for graphics
     String neutral = "Graphics/NeutralBackground.png";
     String correct = "Graphics/CorrectBackground.png";
     String incorrect = "Graphics/IncorrectBackground.png";
-      
+    
+    
     wAnnouncer.setCanvasSize(384,512);
     wAnnouncer.picture(0.5, 0.5, neutral);
     //wAnnouncer.picture(0.5, 0.5, correct);
     //wAnnouncer.picture(0.5, 0.5, incorrect);
-    System.out.println("windowAnnouncerMethod Functioning");
+    wAnnouncer.setLocationOnScreen(160, 30);
+    System.out.println("initWindowAnnouncer Functioning");
   }
-    
+  
   // Connects and Modifies Quiz Window
-  public static void windowQuizMethod(Draw wQuiz, String[] QandA){
-      
+  public static void initWindowQuiz(Draw wQuiz, String[] QandA){
+    
     // Window Properties
     wQuiz.setCanvasSize(768,512);
-    System.out.println("windowQuizMethod Functioning");
-      
+    
+    
     wQuiz.picture(0.5, 0.5, "Graphics/NeutralBackground.png", 1.0, 1.0);
     wQuiz.picture(0.5, 0.5, "Graphics/Template2.png", 0.85, 0.85);
-      
+    
     wQuiz.setPenColor(wQuiz.WHITE);
     String titleQuestion = QandA[0];
-      
-    wQuiz.text(0.5, 0.5, titleQuestion);
-  }
     
-  public static void windowPointsMethod(Draw wPoints){
-    System.out.println("windowPointsMethod Functioning");
+    wQuiz.text(0.5, 0.5, titleQuestion);
+    wQuiz.setLocationOnScreen(560, 30);
+    System.out.println("initWindowQuiz Functioning");
+  }
+  
+  public static void initWindowPoints(Draw wPoints){
+    System.out.println("initWindowPoints Functioning");
     wPoints.setCanvasSize(384,256);
     wPoints.picture(0.5, 0.5, "Graphics/NeutralBackground.png", 1.5, 1.5);
     wPoints.picture(0.5, 0.5, "Graphics/Template1.png", 0.8, 0.8);
-  }
+    wPoints.setLocationOnScreen(160, 610);
+    wPoints.setPenColor(wPoints.WHITE);
     
+  }
+  
   // Connects and Modifies Interactive Window
-  public static void windowInteractiveMethod(Draw wInteractive, String [] QandA, int correctCount, Draw windowQuiz, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
+  public static void initWindowInteractive(Draw windowPoints, Draw wInteractive, String [] QandA, Draw windowQuiz, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     // Strings that hold text to be displayed on window. "p" stands for "possible."
     String trueAnswer = QandA[1];
     String pAnswerOne = QandA[3];
     String pAnswerTwo = QandA[1];
     String pAnswerThree = QandA[2];
     String pAnswerFour = QandA[4]; 
-      
+    
     String button = "Graphics/ButtonGraphic.png";
-      
+    
     wInteractive.setCanvasSize(768,256);
-    System.out.println("windowInteractiveMethod Functioning");
-      
+    System.out.println("initWindowInteractive Functioning");
+    
     wInteractive.picture(0.5, 0.5, "Graphics/NeutralBackground.png", 1.5, 4.0);
-      
+    
     wInteractive.setPenColor(wInteractive.WHITE);
     wInteractive.picture(0.25, 0.75, button);
     wInteractive.text(0.25, 0.75, pAnswerOne);
-      
+    
     wInteractive.picture(0.25, 0.25, button);
     wInteractive.text(0.25, 0.25, pAnswerTwo);
-      
+    
     wInteractive.picture(0.75, 0.75, button);
     wInteractive.text(0.75, 0.75, pAnswerThree);
-      
+    
     wInteractive.picture(0.75, 0.25, button);
     wInteractive.text(0.75, 0.25, pAnswerFour);
-      
-      
+    
+    wInteractive.setLocationOnScreen(560, 610);
     // System receives input from user
     while (true == true){
       double y = wInteractive.mouseY();
       double x = wInteractive.mouseX();
       boolean mouseInteract = wInteractive.isMousePressed();
-        
+      
+      
       // Artificial Hitbox for String 1 Textbox
       if (mouseInteract == true && ((y < 0.9375) && (y > 0.566)) && ((x < 0.375) && (x > 0.125))) {  
         //System.out.println(mouseInteract);
-        correctCheck(pAnswerOne, trueAnswer, correctCount);
+        correctCheck(windowPoints, pAnswerOne, trueAnswer);
         break;
       } 
-        
+      
       // Artificial Hitbox for String 2 Textbox
       if (mouseInteract == true && ((y < 0.4375) && (y > 0.066)) && ((x < 0.375) && (x > 0.125))) {
         //System.out.println(mouseInteract);
-        correctCheck(pAnswerTwo, trueAnswer, correctCount);
+        correctCheck(windowPoints, pAnswerTwo, trueAnswer);
         break;
       } 
-        
+      
       // Artificial Hitbox for String 3 Textbox
       if (mouseInteract == true && ((y < 0.9375) && (y > 0.566)) && ((x < 0.835) && (x > 0.625))) {
         //System.out.println(mouseInteract);
-        correctCheck(pAnswerThree, trueAnswer, correctCount);
+        correctCheck(windowPoints, pAnswerThree, trueAnswer);
         break;
       } 
-        
+      
       // Artificial Hitbox for String 2 Textbox
       if (mouseInteract == true && ((y < 0.4375) && (y > 0.066)) && ((x < 0.835) && (x > 0.625))) {
         //System.out.println(mouseInteract);
-        correctCheck(pAnswerFour, trueAnswer, correctCount);
+        correctCheck(windowPoints, pAnswerFour, trueAnswer);
         break;
       }
     }
-    playGame(windowQuiz, wInteractive, correctCount, questions, answers, wrongAnswers);
-  } 
+
+    playGame(windowPoints, windowQuiz, wInteractive, questions, answers, wrongAnswers);
     
-  //////////////////////////Copy + Paste Code//////////////////////////////////
+  } 
+  
   public static String[] getRandomQandA (ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers) 
   {
     int randQandA = (int)(Math.random()*9) + 0;
@@ -187,28 +192,29 @@ class TriviaCombined {
       randAns3 = randAns2++;
     }
     String [] QandA = new String [5];
-      
+    
     String finalQuestion = questions.get(randQandA);
     String finalAnswer = answers.get(randQandA);
     String wrongAns1 = wrongAnswers.get(randAns1);
     String wrongAns2 = wrongAnswers.get(randAns2);
     String wrongAns3 = wrongAnswers.get(randAns3);
-      
+    
     QandA = new String[] {finalQuestion, finalAnswer, wrongAns1, wrongAns2, wrongAns3};
-      
+    
     return QandA;
   }
-  public static int correctCheck(String pAnswer, String tAnswer, int correctCount) {
+  
+  public static void correctCheck(Draw windowPoints, String pAnswer, String tAnswer) {
     
-    
-    if( pAnswer.equals(tAnswer) == true ) {
+    System.out.println("correctCheck Functioning");
+    if(pAnswer.equals(tAnswer) == true ) {
       System.out.println("Correct!");
       correctCount++;
       System.out.println(correctCount);
-      
     } else {
       System.out.println("Wrong!");
     }
-    return correctCount;
+    String numberCounter = String.valueOf(correctCount);
+    windowPoints.text(0.5, 0.5, numberCounter);
   }
 }
