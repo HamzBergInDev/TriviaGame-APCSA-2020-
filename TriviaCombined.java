@@ -5,10 +5,33 @@ import java.io.File;
 import java.util.Random;
 import java.io.FileNotFoundException;
 
+/**
+ * This is the AP Computer Science A program 
+ * made with the requirements of developing a 1D Array.
+ * The resulting program is a Trivia game.
+ * 
+ * @author Zoe Weiner and Hamadi Belghachi
+ * @version 1.0
+ * @since 2020-02-28
+ */
 class TriviaCombined {
   
+  /**
+   * The global integer that 
+   * counts the player's score.
+   */
   public static int correctCount = 0;
   
+  /**
+   * The main method that connects every other method together.
+   * @author Zoe Weiner and Hamadi Belghachi
+   * @throws FileNotFoundException
+   * Throws FileNotFoundException if an ANSI formated 
+   * trivia.txt file is not found in the same directory
+   * as the TriviaCombined class file.
+   * @param args
+   * Recieves arguments.
+   */
   public static void main (String[] args) throws FileNotFoundException {
     
     // Variables that create windows.
@@ -42,6 +65,24 @@ class TriviaCombined {
     
   }
   
+  /**
+   * This method is used to run the game.
+   * Uses an infinite while loop to keep running.
+   * @author Zoe Weiner and Hamadi Belghachi
+   * @param windowPoints
+   * Bridges to initWindowPoints to display amount of points on screen
+   * @param windowQuiz
+   * Bridges to initWindowQuiz to display question
+   * @param windowInteractive
+   * Bridges to initWindowInteractive to recieve input from player
+   * and display answers on button
+   * @param questions
+   * List of questions.
+   * @param answers
+   * List of correct answers.
+   * @param wrongAnswers
+   * List of incorrect answers.
+   */
   public static void playGame (Draw windowPoints, Draw windowQuiz, Draw windowInteractive, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     while(true) {
       TriviaCombined game = new TriviaCombined();
@@ -52,7 +93,13 @@ class TriviaCombined {
     }
   }
   
-  // Connects and Modifies Announcer Window
+  /**
+   * (Method is unused) Used to change the properties of the Announcer window
+   * and change background graphics if the answer selected is inccorrect or correct.
+   * @author Hamadi Belghachi
+   * @param wAnnouncer
+   * Connects to Draw windowAnnouncer to edit its window.
+   */
   public static void initWindowAnnouncer(Draw wAnnouncer) {
     
     // Strings that call for graphics
@@ -69,7 +116,14 @@ class TriviaCombined {
     System.out.println("initWindowAnnouncer Functioning");
   }
   
-  // Connects and Modifies Quiz Window
+  /** 
+   * Used to display the graphics and question for the player to read.
+   * @author Hamadi Belghachi
+   * @param wQuiz
+   * Connects to Draw windowQuiz to edit its window.
+   * @param QandA
+   * Corrects to ArrayList QandA to retrieve random question.
+   */
   public static void initWindowQuiz(Draw wQuiz, String[] QandA){
     
     // Window Properties
@@ -87,6 +141,12 @@ class TriviaCombined {
     System.out.println("initWindowQuiz Functioning");
   }
   
+  /**
+   * Used to display graphics and amount of points the player has.
+   * @author Hamadi Belghachi
+   * @param wPoints
+   * Connects to Draw windowPoints to edit the window's contents.
+   */
   public static void initWindowPoints(Draw wPoints){
     System.out.println("initWindowPoints Functioning");
     wPoints.setCanvasSize(384,256);
@@ -97,7 +157,25 @@ class TriviaCombined {
     
   }
   
-  // Connects and Modifies Interactive Window
+  /**
+   * Used to display the graphics and interactive spaces 
+   * the player can click on to select and answer.
+   * @author Hamadi Belghachi
+   * @param windowPoints
+   * Bridges to initWindowPoints to display amount of points on screen.
+   * @param wInteractive
+   * Connects to Draw windowInteractive to modify window's contents.
+   * @param windowQuiz
+   * Bridges to initWindowQuiz to display question
+   * @param QandA
+   * Retrieves 1 random question, 1 random correct answer, and 3 incorrect answers.
+   * @param questions
+   * List of questions.
+   * @param answers
+   * List of correct answers.
+   * @param wrongAnswers
+   * List of incorrect answers.
+   */
   public static void initWindowInteractive(Draw windowPoints, Draw wInteractive, String [] QandA, Draw windowQuiz, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     // Strings that hold text to be displayed on window. "p" stands for "possible."
     String trueAnswer = QandA[1];
@@ -162,11 +240,23 @@ class TriviaCombined {
         break;
       }
     }
-
+    
     playGame(windowPoints, windowQuiz, wInteractive, questions, answers, wrongAnswers);
     
   } 
   
+  /**
+   * Used to generate the random question, correct answer, and 3 incorrect answers.
+   * @author Zoe Weiner
+   * @param questions
+   * List of questions.
+   * @param answers
+   * List of correct answers.
+   * @param wrongAnswers
+   * List of incorrect answers.
+   * @return QandA
+   * returns random question, answer, and incorrect answers to the ArrayList QandA.
+   */
   public static String[] getRandomQandA (ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers) 
   {
     int randQandA = (int)(Math.random()*9) + 0;
@@ -204,17 +294,29 @@ class TriviaCombined {
     return QandA;
   }
   
-  public static void correctCheck(Draw windowPoints, String pAnswer, String tAnswer) {
-    
-    System.out.println("correctCheck Functioning");
-    if(pAnswer.equals(tAnswer) == true ) {
-      System.out.println("Correct!");
-      correctCount++;
-      System.out.println(correctCount);
-    } else {
-      System.out.println("Wrong!");
-    }
-    String numberCounter = String.valueOf(correctCount);
-    windowPoints.text(0.5, 0.5, numberCounter);
-  }
-}
+  /** 
+   * Used to check if the answer is correct,
+   * add a point if correct, 
+   * update the text on windowPoints.
+   * @author Hamadi Belghachi
+   * @param windowPoints
+   * Bridges to initWindowPoints to display amount of points on screen. 
+   * @param pAnswer
+   * Recieves an answer from initWindowInteractive.
+   * @param tAnswer
+   * Recieves the correct answer from QandA.
+   */
+   public static void correctCheck(Draw windowPoints, String pAnswer, String tAnswer) {
+   
+   System.out.println("correctCheck Functioning");
+   if(pAnswer.equals(tAnswer) == true ) {
+   System.out.println("Correct!");
+   correctCount++;
+   System.out.println(correctCount);
+   } else {
+   System.out.println("Wrong!");
+   }
+   String numberCounter = String.valueOf(correctCount);
+   windowPoints.text(0.5, 0.5, numberCounter);
+   }
+   }
