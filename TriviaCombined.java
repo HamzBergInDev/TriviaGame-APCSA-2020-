@@ -6,6 +6,7 @@ import java.util.Random;
 import java.io.FileNotFoundException;
 
 /**
+<<<<<<< HEAD
  * This is the AP Computer Science A program 
  * made with the requirements of developing a 1D Array.
  * The resulting program is a Trivia game.
@@ -14,6 +15,12 @@ import java.io.FileNotFoundException;
  * @version 1.0
  * @since 2020-02-28
  */
+=======
+ * A trivia game about computer parts
+ * Uses four windows to display question, answers, and points
+ */ 
+
+>>>>>>> 5f518d42992ab69021838056c47479136eb3bab4
 class TriviaCombined {
   
   /**
@@ -64,6 +71,7 @@ class TriviaCombined {
     playGame(windowPoints, windowQuiz, windowInteractive, questions, answers, wrongAnswers);
     
   }
+<<<<<<< HEAD
   
   /**
    * This method is used to run the game.
@@ -82,6 +90,10 @@ class TriviaCombined {
    * List of correct answers.
    * @param wrongAnswers
    * List of incorrect answers.
+=======
+  /*
+   * 
+>>>>>>> 5f518d42992ab69021838056c47479136eb3bab4
    */
   public static void playGame (Draw windowPoints, Draw windowQuiz, Draw windowInteractive, ArrayList<String> questions, ArrayList<String> answers, ArrayList<String> wrongAnswers){
     while(true) {
@@ -243,7 +255,16 @@ class TriviaCombined {
     
     playGame(windowPoints, windowQuiz, wInteractive, questions, answers, wrongAnswers);
     
-  } 
+  }
+  
+  /**
+   * Gets a random question, correct answer, and three random answers
+   * @return String array with question, correct answer, and three wrong answers
+   * @param questions This holds all questions in the game
+   * @param answers This holds all correct answers
+   * @param wrongAnswers This holds all incorrect answers
+   * @author Zoe Weiner
+   */
   
   /**
    * Used to generate the random question, correct answer, and 3 incorrect answers.
@@ -294,6 +315,7 @@ class TriviaCombined {
     return QandA;
   }
   
+<<<<<<< HEAD
   /** 
    * Used to check if the answer is correct,
    * add a point if correct, 
@@ -320,3 +342,28 @@ class TriviaCombined {
    windowPoints.text(0.5, 0.5, numberCounter);
    }
    }
+=======
+  /**
+   * Checks that the answer chosen is correct
+   * Counts the number of correct answers chosen
+   * @param windowPoints 
+   * @param pAnswer This is the answer chosen
+   * @param tAnswer This is the correct answer
+   * @author 
+   */
+  
+  public static void correctCheck(Draw windowPoints, String pAnswer, String tAnswer) {
+    
+    System.out.println("correctCheck Functioning");
+    if(pAnswer.equals(tAnswer) == true ) {
+      System.out.println("Correct!");
+      correctCount++;
+      System.out.println(correctCount);
+    } else {
+      System.out.println("Wrong!");
+    }
+    String numberCounter = String.valueOf(correctCount);
+    windowPoints.text(0.5, 0.5, numberCounter);
+  }
+}
+>>>>>>> 5f518d42992ab69021838056c47479136eb3bab4
